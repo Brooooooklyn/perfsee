@@ -37,7 +37,12 @@ export const getCurrentCommit = async () => {
 export const getProjectInfoFromGit = async () => {
   const git = simpleGit()
 
-  const project = await git.getRemotes(true).then(([remote]) => parseGitRemoteUrl(remote.refs.fetch))
+  const project = await git.getRemotes(true).then(([remote]) => {
+    if (remote.refs?.fetch) {
+      return parseGitRemoteUrl(remote.refs.fetch)
+    }
+    return null
+  })
   if (!project) {
     return null
   }

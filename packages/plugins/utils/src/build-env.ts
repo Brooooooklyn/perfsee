@@ -65,6 +65,15 @@ async function getGitEnv(): Promise<GitEnv> {
       commit: envs.commit,
       tag: 'tag' in envs ? (envs.tag !== 'undefined' ? envs.tag : void 0) : void 0,
     }
+    // @ts-expect-error
+  } else if (envs.isCi && envs.service === 'vercel' && process.env.VERCEL_GIT_PROVIDER === 'github') {
+    return {
+      namespace: process.env.VERCEL_GIT_REPO_OWNER!,
+      name: process.env.VERCEL_GIT_REPO_SLUG!,
+      branch: process.env.VERCEL_GIT_COMMIT_REF!,
+      commit: process.env.VERCEL_GIT_COMMIT_SHA!,
+      host: 'github.com',
+    }
   } else {
     const project = await getProjectInfoFromGit()
     const commit = await getCurrentCommit()
