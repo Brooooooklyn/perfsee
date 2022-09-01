@@ -1,0 +1,32 @@
+{
+  "rewrites": [
+    {
+      "source": "/graphql",
+      "destination": "https://api.perf.observer/graphql"
+    },
+    {
+      "source": "/api/:match*",
+      "destination": "https://api.perf.observer/api/:match*"
+    },
+    {
+      "source": "/auth/:match*",
+      "destination": "https://api.perf.observer/auth/:match*"
+    },
+    {
+      "source": "/oauth2/:match*",
+      "destination": "https://api.perf.observer/oauth2/:match*"
+    },
+    {
+      "source": "/health",
+      "destination": "https://api.perf.observer/health"
+    },
+    {
+      "source": "/github/:match*",
+      "destination": "https://api.perf.observer/github/:match*"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
